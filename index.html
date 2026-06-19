@@ -7,90 +7,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2k66Xo2vQf6F2D5+j+F4xYpG2jA/2/4fJ5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #000;
-            color: #fff;
-            overflow-x: hidden;
-            position: relative;
-            cursor: crosshair;
-        }
-
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            /* Prevents the canvas from being interacted with directly */
-            pointer-events: none;
-        }
-
-        .content-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 10;
-        }
-
-        .glass-card {
-            backdrop-filter: blur(10px) brightness(0.6);
-            background-color: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 1.5rem;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .reveal-toggle {
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .reveal-toggle.rotated {
-            transform: rotate(90deg);
-        }
-
-        .hidden-content {
-            display: none;
-        }
-
-        /* Custom scrollbar for a space-theme feel */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #38bdf8;
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #0ea5e9;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-black text-gray-100">
 
-    <!-- The canvas for the 3D space animation -->
-    <canvas id="bg-canvas"></canvas>
+    <div class="layer nebula"></div>
+    <div class="layer aurora"></div>
+    <canvas class="stars"></canvas>
+    <div class="shoots"></div>
+    <div class="noise"></div>
 
-    <!-- Navigation Bar -->
     <nav class="sticky top-0 bg-black/70 backdrop-blur-md z-50 p-4 transition-all duration-300 rounded-b-3xl shadow-lg">
         <div class="container mx-auto flex flex-wrap justify-center sm:justify-between items-center space-y-4 sm:space-y-0 px-4">
             <div class="text-xl font-bold text-white tracking-widest text-center sm:text-left">
                 LOHITAKSHA KOPPADA
             </div>
-            <div class="flex flex-wrap justify-center sm:justify-start space-x-4 md:space-x-8">
+            <div class="flex flex-wrap justify-center sm:justify-start space-x-4 md:space-x-8 menu">
                 <a href="#profile" class="text-white hover:text-cyan-400 transition-colors duration-300 font-semibold text-lg">Profile</a>
                 <a href="#about-me" class="text-white hover:text-cyan-400 transition-colors duration-300 font-semibold text-lg">About Me</a>
                 <a href="#projects" class="text-white hover:text-cyan-400 transition-colors duration-300 font-semibold text-lg">Projects</a>
@@ -101,623 +36,212 @@
         </div>
     </nav>
 
+    <div class="text-center mt-6 px-4">
+        <span id="typer" class="text-cyan-400 font-mono text-sm md:text-base border-r-2 border-cyan-400 pr-1"></span>
+    </div>
 
-    <div class="content-container p-6 lg:p-12 space-y-20">
+    <div class="content-container p-6 lg:p-12 space-y-20 max-w-6xl mx-auto relative z-10">
 
-    <section id="profile" class="glass-card p-8 md:p-12 text-center rounded-2xl shadow-xl border border-cyan-500/30 bg-gray-900/60 backdrop-blur-lg">
-        <h1 class="text-4xl md:text-6xl font-extrabold text-cyan-400">
-            <span class="block text-gray-300 text-lg md:text-xl mb-2">Welcome!</span>
-            I’m <span class="text-cyan-300">Lohitaksha Koppada</span>
-        </h1>
-        <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
-            Resolute and results-oriented professional specializing in computational methods, data science, and AI-driven scientific research.
-        </p>
-    </section>
-
-    <section id="about-me" aria-labelledby="about-title" class="glass-card p-8 md:p-12 rounded-2xl shadow-xl border border-cyan-500/30 bg-gray-900/60 backdrop-blur-lg">
-        <header class="mb-6">
-            <h1 id="about-title" class="text-3xl md:text-4xl font-bold text-cyan-400">About Me</h1>
-            <p class="text-gray-300 mt-4">
-                I am a passionate researcher with proven expertise in independently designing and executing complex projects. I thrive on quickly mastering new concepts and applying advanced computational methodologies to investigate intricate scientific problems, analyze complex datasets, and drive innovation.
+        <section id="profile" class="glass-card card p-8 md:p-12 text-center rounded-2xl shadow-xl border border-cyan-500/30 bg-gray-900/60 backdrop-blur-lg reveal">
+            <div class="reveal-hover"></div>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-cyan-400">
+                <span class="block text-gray-300 text-lg md:text-xl mb-2">Welcome!</span>
+                I’m <span class="text-cyan-300">Lohitaksha Koppada</span>
+            </h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
+                Resolute and results-oriented professional specializing in computational methods, data science, and AI-driven scientific research.
             </p>
-        </header>
+        </section>
 
-        <article id="technical-skills" aria-labelledby="skills-title" class="mb-8">
-            <h2 id="skills-title" class="text-2xl font-semibold text-cyan-300">Technical Skills</h2>
-            <div class="text-gray-300 mt-2 space-y-2">
-                <p><strong>Programming Languages:</strong> C, C++, Java, Python</p>
-                <p><strong>Data Science & Visualization:</strong> NumPy, Pandas, Matplotlib</p>
-                <p><strong>AI, Deep Learning & LLMs:</strong> PyTorch, LangGraph</p>
-            </div>
-        </article>
+        <section id="about-me" aria-labelledby="about-title" class="glass-card card p-8 md:p-12 rounded-2xl shadow-xl border border-cyan-500/30 bg-gray-900/60 backdrop-blur-lg reveal">
+            <div class="reveal-hover"></div>
+            <header class="mb-6">
+                <h1 id="about-title" class="text-3xl md:text-4xl font-bold text-cyan-400">About Me</h1>
+                <p class="text-gray-300 mt-4">
+                    I am a passionate researcher with proven expertise in independently designing and executing complex projects. I thrive on quickly mastering new concepts and applying advanced computational methodologies to investigate intricate scientific problems, analyze complex datasets, and drive innovation.
+                </p>
+            </header>
 
-        <article id="research" aria-labelledby="research-title" class="mb-8">
-            <h2 id="research-title" class="text-2xl font-semibold text-cyan-300">Research & Publications</h2>
-            <p class="text-gray-300 mt-2">
-                Demonstrated ability to apply computational workflows to extract insights from complex scientific datasets. Notably, contributed to the peer-reviewed <cite class="not-italic text-cyan-400">European Journal of Pharmacology</cite> on the research topic: <strong>"Eicosanoid Signaling in Neuroinflammation associated with Alzheimer's disease."</strong>
-            </p>
-        </article>
+            <article id="technical-skills" aria-labelledby="skills-title" class="mb-8">
+                <h2 id="skills-title" class="text-2xl font-semibold text-cyan-300">Technical Skills</h2>
+                <div class="text-gray-300 mt-2 space-y-2">
+                    <p><strong>Programming Languages:</strong> C, C++, Java, Python</p>
+                    <p><strong>Data Science & Visualization:</strong> NumPy, Pandas, Matplotlib</p>
+                    <p><strong>AI, Deep Learning & LLMs:</strong> PyTorch, LangGraph</p>
+                </div>
+            </article>
 
-        <article id="academics" aria-labelledby="academics-title" class="mb-8">
-            <h2 id="academics-title" class="text-2xl font-semibold text-cyan-300">Academic Journey & Excellence</h2>
-            <p class="text-gray-300 mt-2">
-                Consistently recognized for stellar academic performance, maintaining a top-tier CGPA in the Integrated Master's (IMSc) Program in Chemical Sciences at the University of Hyderabad, where I was honored as the <strong>IMSc 1st rank holder continuously for five years</strong>.
-            </p>
-            <p class="text-gray-300 mt-2">
-                Proven competitive excellence by achieving top ranks nationwide:
-            </p>
-            <ul class="list-disc list-inside text-gray-300 mt-1 space-y-1 ml-2">
-                <li><strong>CSIR-NET-JRF 2025:</strong> AIR – 37 (Assistant Professor and Admission to Ph.D. category)</li>
-                <li><strong>GATE 2025:</strong> AIR – 727</li>
-            </ul>
-        </article>
+            <article id="research" aria-labelledby="research-title" class="mb-8">
+                <h2 id="research-title" class="text-2xl font-semibold text-cyan-300">Research & Publications</h2>
+                <p class="text-gray-300 mt-2">
+                    Demonstrated ability to apply computational workflows to extract insights from complex scientific datasets. Notably, contributed to the peer-reviewed <cite class="not-italic text-cyan-400">European Journal of Pharmacology</cite> on the research topic: <strong>"Eicosanoid Signaling in Neuroinflammation associated with Alzheimer's disease."</strong>
+                </p>
+            </article>
 
-        <footer aria-labelledby="values-title" class="mt-10">
-            <h2 id="values-title" class="text-2xl font-semibold text-cyan-300">Leadership & Vision</h2>
-            <p class="text-gray-300 mt-2">
-                Equipped with strong leadership and communication skills sharpened through managing research teams and presenting complex findings directly to domain experts. I am committed to continuous learning and eager to leverage an interdisciplinary approach to contribute meaningfully to a dynamic team focused on innovation and professional growth.
-            </p>
-
-            <div class="flex flex-wrap gap-2 mt-8">
-                <span class="px-3 py-1 bg-gray-800 text-cyan-400 rounded-full text-sm font-semibold">AI & Deep Learning</span>
-                <span class="px-3 py-1 bg-gray-800 text-cyan-400 rounded-full text-sm font-semibold">Data Science</span>
-                <span class="px-3 py-1 bg-gray-800 text-cyan-400 rounded-full text-sm font-semibold">Chemical Sciences</span>
-                <span class="px-3 py-1 bg-gray-800 text-cyan-400 rounded-full text-sm font-semibold">Computational Research</span>
-                <span class="px-3 py-1 bg-gray-800 text-cyan-400 rounded-full text-sm font-semibold">Python / PyTorch</span>
-                <span class="px-3 py-1 bg-gray-800 text-cyan-400 rounded-full text-sm font-semibold">Leadership</span>
-                <span class="px-3 py-1 bg-gray-800 text-cyan-400 rounded-full text-sm font-semibold">Innovation</span>
-                <span class="px-3 py-1 bg-gray-800 text-cyan-400 rounded-full text-sm font-semibold">Scientific Inquiry</span>
-            </div>
-        </footer>
-    </section>
-</div>
-
-        <section id="projects" class="space-y-12">
-
-    <h3 class="text-2xl md:text-4xl font-bold text-center text-gray-300">Underway</h3>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="glass-card p-6 flex flex-col h-full hover:shadow-xl hover:border-cyan-400 transition-all duration-300">
-            <div class="flex items-center justify-between mb-4 cursor-pointer" onclick="toggleReveal(this)">
-                <h3 class="text-xl font-semibold">Book Project: "The Quantum Revolution"</h3>
-                <span class="text-2xl text-cyan-400 reveal-toggle">&#9656;</span>
-            </div>
-            <div class="hidden-content">
-                <ul class="list-disc list-inside space-y-2 text-gray-300">
-                    <li>Leading the authorship of a two-volume advanced Quantum Mechanics series for graduate-level students, in collaboration with Dr. Caio Firme, Associate Professor at Federal University of Rio Grande do Norte.</li>
-                    <li>The series has been accepted for publication by CRC Press.</li>
+            <article id="academics" aria-labelledby="academics-title" class="mb-8">
+                <h2 id="academics-title" class="text-2xl font-semibold text-cyan-300">Academic Journey & Excellence</h2>
+                <p class="text-gray-300 mt-2">
+                    Consistently recognized for stellar academic performance, maintaining a top-tier CGPA in the Integrated Master's (IMSc) Program in Chemical Sciences at the University of Hyderabad, where I was honored as the <strong>IMSc 1st rank holder continuously for five years</strong>.
+                </p>
+                <p class="text-gray-300 mt-2">
+                    Proven competitive excellence by achieving top ranks nationwide:
+                </p>
+                <ul class="list-disc list-inside text-gray-300 mt-1 space-y-1 ml-2">
+                    <li><strong>CSIR-NET-JRF 2025:</strong> AIR – 37 (Assistant Professor and Admission to Ph.D. category)</li>
+                    <li><strong>GATE 2025:</strong> AIR – 727</li>
                 </ul>
-            </div>
-            <div class="flex flex-wrap gap-2 mt-4">
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Physics</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Quantum Mechanics</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Author</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Graduate Education</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Collaboration</span>
-            </div>
-        </div>
+            </article>
 
+            <footer aria-labelledby="values-title" class="mt-10">
+                <h2 id="values-title" class="text-2xl font-semibold text-cyan-300">Leadership & Vision</h2>
+                <p class="text-gray-300 mt-2">
+                    Equipped with strong leadership and communication skills sharpened through managing research teams and presenting complex findings directly to domain experts. I am committed to continuous learning and eager to leverage an interdisciplinary approach to contribute meaningfully to a dynamic team focused on innovation and professional growth.
+                </p>
 
-        <div class="glass-card p-6 flex flex-col h-full hover:shadow-xl hover:border-cyan-400 transition-all duration-300">
-            <div class="flex items-center justify-between mb-4 cursor-pointer" onclick="toggleReveal(this)">
-                <h3 class="text-xl font-semibold">M.Tech Project: Hydrogen Embrittlement in Low-density Steels</h3>
-                <span class="text-2xl text-cyan-400 reveal-toggle">&#9656;</span>
-            </div>
-            <div class="hidden-content">
-                <ul class="list-disc list-inside space-y-2 text-gray-300">
-                    <li>Investigating the mechanical and microstructural evolution of Low Density Steel under hydrogen exposure.</li>
-                    <li>Combining fracture toughness tests, hydrogen charging, microanalysis techniques like XRF/SEM/ECCI/EBSD.</li>
-                </ul>
-            </div>
-            <div class="flex flex-wrap gap-2 mt-4">
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Hydrogen Embrittlement</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Low-density steels</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Microanalysis</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Computational Modelling</span>
-            </div>
-        </div>
-    </div>
-</section>
-            
-            <<h3 class="text-2xl md:text-4xl font-bold text-center text-gray-300 mt-12 mb-8">Accomplished</h3>
-<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-    <div class="glass-card p-6 flex flex-col h-full hover:shadow-xl hover:border-cyan-400 transition-all duration-300">
-        <div class="flex items-center justify-between mb-4 cursor-pointer" onclick="toggleReveal(this)">
-            <h3 class="text-xl font-semibold">Master’s Project: Confined Hydrogen Atom (Phase I)</h3>
-            <span class="text-2xl text-cyan-400 reveal-toggle">&#9656;</span>
-        </div>
-        <div class="hidden-content">
-            <ul class="list-disc list-inside space-y-2 text-gray-300">
-                <li>Conducted an in-depth literature survey on the theoretical treatment of screened Coulomb potentials, focusing on their application in multi-electron systems and confined hydrogen atoms.</li>
-                <li>Explored the effects of various potential models (e.g., Yukawa and Hulthén potentials) on the electronic structure and properties of hydrogen-like systems under confinement.</li>
-                <li>Analyzed the impact of screening effects on the energy spectrum, wavefunctions, and chemical reactivity in confined hydrogen atoms using advanced quantum mechanical approaches.</li>
-                <li>Reviewed key papers and recent developments in quantum chemistry, with a particular emphasis on potential approximations and computational techniques for multi-electron systems.</li>
-                <li>Engaged in theoretical and computational analysis of confined hydrogen atom models to understand modifications in electron behavior under constrained environments.</li>
-            </ul>
-        </div>
-        <div class="flex flex-wrap gap-2 mt-4">
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Quantum Mechanics</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Quantum Confinement</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Screened Coulomb Potentials</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Computational Simulations</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Critical Literature Review</span>
-        </div>
-    </div>
-    
-    <div class="glass-card p-6 flex flex-col h-full hover:shadow-xl hover:border-cyan-400 transition-all duration-300">
-        <div class="flex items-center justify-between mb-4 cursor-pointer" onclick="toggleReveal(this)">
-            <h3 class="text-xl font-semibold">Master's Project: Confined Hydrogen Atom (Phase II)</h3>
-            <span class="text-2xl text-cyan-400 reveal-toggle">&#9656;</span>
-        </div>
-        <div class="hidden-content">
-            <ul class="list-disc list-inside space-y-2 text-gray-300">
-                <li>This second phase of the Master's project focused on the theoretical and computational investigation of the electronic properties of confined hydrogen atoms subjected to screened Coulomb potentials. The core objective was to analyze the interplay between quantum mechanical confinement and environmental screening effects.</li>
-                <li class="mt-4"><strong>Key aspects included:</strong>
-                    <ul class="list-disc list-inside space-y-1 ml-6">
-                        <li><strong>Electronic Structure Analysis:</strong>
-                            <ul class="list-disc list-inside space-y-1 ml-6">
-                                <li>Conducted detailed calculations of the energy levels of the hydrogen atom under spatial confinement and in the presence of screened Coulomb potentials [e.g., Hulthén / Yukawa / Hulthén(2λ) / Exponential Cosine Screened Coulomb Potential].</li>
-                                <li>Systematically investigated the combined influence of confinement and varying screening parameters on the electronic properties.</li>
-                            </ul>
-                        </li>
-                        <li><strong>Information-Theoretic Measures:</strong>
-                            <ul class="list-disc list-inside space-y-1 ml-6">
-                                <li>Computed <strong>Shannon entropy</strong> to quantify the degree of uncertainty or randomness in the electron's spatial distribution.</li>
-                                <li>Calculated <strong>disequilibrium</strong> to assess the deviation from a uniform probability distribution, providing insights into the system's degree of order.</li>
-                                <li>By combining the Shannon entropy and disequilibrium values, the statistical complexity was calculated to quantify the structural organization and pattern formation within the confined hydrogen atom.</li>
-                            </ul>
-                        </li>
-                        <li><strong>Data Analysis and Interpretation:</strong>
-                            <ul class="list-disc list-inside space-y-1 ml-6">
-                                <li>Extensive data analysis was conducted to extract meaningful insights from the computational results.</li>
-                                <li>This involved visualizing data, performing statistical analysis, and interpreting the results in the context of quantum mechanical principles.</li>
-                                <li>The impact of the screening parameters on the statistical complexity of the system was analyzed and interpreted.</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li class="mt-4"><strong>Skills Developed:</strong>
-                    <ul class="list-disc list-inside space-y-1 ml-6">
-                        <li>Strong understanding of quantum mechanical principles and their application to atomic systems.</li>
-                        <li>Experience in analyzing and interpreting complex data sets.</li>
-                        <li>Expertise in calculating and interpreting information-theoretic measures, including Shannon entropy, disequilibrium, and statistical complexity.</li>
-                        <li>Proficiency in data visualization and statistical analysis using Python, NumPy, and Pandas.</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <div class="flex flex-wrap gap-2 mt-4">
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Screened Coulomb Potentials</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Quantum Confinement Effects</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Information Measures (Shannon Entropy)</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Computational & Advanced Data Analysis</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Scientific Computing with Python</span>
-        </div>
-    </div>
+                <div class="flex flex-wrap gap-2 mt-8">
+                    <span class="chip text-sm font-semibold text-cyan-400">AI & Deep Learning</span>
+                    <span class="chip text-sm font-semibold text-cyan-400">Data Science</span>
+                    <span class="chip text-sm font-semibold text-cyan-400">Chemical Sciences</span>
+                    <span class="chip text-sm font-semibold text-cyan-400">Computational Research</span>
+                    <span class="chip text-sm font-semibold text-cyan-400">Python / PyTorch</span>
+                    <span class="chip text-sm font-semibold text-cyan-400">Leadership</span>
+                    <span class="chip text-sm font-semibold text-cyan-400">Innovation</span>
+                    <span class="chip text-sm font-semibold text-cyan-400">Scientific Inquiry</span>
+                </div>
+            </footer>
+        </section>
 
-    <div class="glass-card p-6 flex flex-col h-full hover:shadow-xl hover:border-cyan-400 transition-all duration-300">
-        <div class="flex items-center justify-between mb-4 cursor-pointer" onclick="toggleReveal(this)">
-            <h3 class="text-xl font-semibold">Collaborative Summer Project on Eicosanoids</h3>
-            <span class="text-2xl text-cyan-400 reveal-toggle">&#9656;</span>
-        </div>
-        <div class="hidden-content">
-            <ul class="list-disc list-inside space-y-2 text-gray-300">
-                <li>Explored the intricate biochemical pathways of eicosanoids, focusing on their regulation of inflammation, immunity, and cellular communication.</li>
-                <li>Unraveled the complex cascades through which these lipid mediators impact diverse physiological processes, with an emphasis on their roles in neuroinflammation.</li>
-                <li>Expanded the project scope to investigate the involvement of eicosanoids in neurodegenerative disorders such as Alzheimer's, Parkinson's, and other neurological conditions.</li>
-                <li>Led efforts to explore therapeutic possibilities by examining how eicosanoid signaling contributes to the pathophysiology of neurodegenerative diseases.</li>
-                <li>Collaborated in a dynamic, interdisciplinary team, integrating lipid biochemistry and neuroscience to generate valuable insights, setting the stage for further research.</li>
-            </ul>
-        </div>
-        <div class="flex flex-wrap gap-2 mt-4">
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Biochemistry</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Neuroscience</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Inflammation</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Therapeutic Research</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Collaboration</span>
-        </div>
-    </div>
-
-    <div class="glass-card p-6 flex flex-col h-full hover:shadow-xl hover:border-cyan-400 transition-all duration-300">
-        <div class="flex items-center justify-between mb-4 cursor-pointer" onclick="toggleReveal(this)">
-            <h3 class="text-xl font-semibold">Published Review Article</h3>
-            <span class="text-2xl text-cyan-400 reveal-toggle">&#9656;</span>
-        </div>
-        <div class="hidden-content">
-            <ul class="list-disc list-inside space-y-2 text-gray-300">
-                <li>Led the review article examining the role of eicosanoid signaling in neuroinflammation associated with Alzheimer's disease.</li>
-                <li>Emphasized its biochemical mechanisms and therapeutic potential.</li>
-                <li>Managed the balance between academics and research over the 8-month duration, coordinating interdisciplinary contributions and synthesizing findings from multiple sources to ensure a high standard of scientific rigor.</li>
-               <li>Finalized and submitted the manuscript for publication in a peer-reviewed <em>European Journal of Pharmacology</em> (published in May 2024;  <a href="https://doi.org/10.1016/j.ejphar.2024.176694" target="_blank" style="color:#1a73e8; text-decoration:none;"> DOI: 10.1016/j.ejphar.2024.176694
-             </a>), contributing valuable insights to the field of neurodegenerative disease research.</li>
-
-            </ul>
-        </div>
-        <div class="flex flex-wrap gap-2 mt-4">
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Scientific Writing</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Neuroinflammation</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Alzheimer's Disease</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Peer-Reviewed Publication</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Research Leadership</span>
-        </div>
-    </div>
-
-    <div class="glass-card p-6 flex flex-col h-full hover:shadow-xl hover:border-cyan-400 transition-all duration-300">
-        <div class="flex items-center justify-between mb-4 cursor-pointer" onclick="toggleReveal(this)">
-            <h3 class="text-xl font-semibold">Summer Internship: Bio-signaling</h3>
-            <span class="text-2xl text-cyan-400 reveal-toggle">&#9656;</span>
-        </div>
-        <div class="hidden-content">
-            <ul class="list-disc list-inside space-y-2 text-gray-300">
-                <li>Engaged in an intensive two-month study focused on understanding the intricate biosignaling pathways that regulate various physiological processes.</li>
-                <li>Conducted comprehensive literature reviews to explore the molecular mechanisms underpinning cellular communication, signal transduction, and their role in maintaining cellular homeostasis.</li>
-                <li>Gained foundational knowledge of key bio-signaling pathways involved in immunity, inflammation, and cellular responses to stimuli, with a particular focus on their implications in disease progression.</li>
-                <li>Developed a deeper understanding of the molecular basis of signal transduction, contributing to a broader awareness of its potential in therapeutic interventions and drug design.</li>
-                <li>Collaborated with my guide, Late Prof. Laksmipathi, to discuss emerging trends in biosignaling, which enhanced my theoretical knowledge and practical insights into its potential for therapeutic interventions and drug design.</li>
-            </ul>
-        </div>
-        <div class="flex flex-wrap gap-2 mt-4">
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Biochemistry</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Bio-signaling</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Cellular Biology</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Therapeutic Interventions</span>
-            <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Research Internship</span>
-        </div>
-    </div>
-</div>
-
-        <section id="skills" class="mt-24 space-y-16">
-    <h2 class="text-3xl md:text-5xl font-bold text-center text-cyan-400">Cosmic Skills: The Digital Universe I Navigate</h2>
-    
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="glass-card p-6 h-full hover:shadow-xl hover:border-cyan-400 transition-all duration-300">
-            <div class="flex items-center justify-between mb-4 cursor-pointer" onclick="toggleReveal(this)">
-                <h3 class="text-xl font-semibold">Python & ML Fundamentals</h3>
-                <span class="text-2xl text-cyan-400 reveal-toggle">&#9656;</span>
-            </div>
-            <div class="hidden-content">
-                <ul class="list-disc list-inside space-y-2 text-gray-300">
-                    <li><strong>Python Programming:</strong> Proficient in fundamental data structures and libraries like NumPy, Pandas, and Matplotlib.</li>
-                    <li><strong>ML Libraries:</strong> Experienced with `scikit-learn` for classification, regression, and clustering tasks.</li>
-                    <li><strong>Deep Learning:</strong> Skilled in using Keras and TensorFlow for building neural networks, including CNNs and RNNs.</li>
-                    <li><strong>Recommender Systems:</strong> Designed and implemented basic Content-Based and Collaborative Filtering systems.</li>
-                </ul>
-            </div>
-            <div class="flex flex-wrap gap-2 mt-4">
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Python</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Machine Learning</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Data Science</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Deep Learning</span>
-            </div>
-        </div>
-
-        <div class="glass-card p-6 h-full hover:shadow-xl hover:border-cyan-400 transition-all duration-300">
-            <div class="flex items-center justify-between mb-4 cursor-pointer" onclick="toggleReveal(this)">
-                <h3 class="text-xl font-semibold">Supervised & Unsupervised Learning</h3>
-                <span class="text-2xl text-cyan-400 reveal-toggle">&#9656;</span>
-            </div>
-            <div class="hidden-content">
-                <ul class="list-disc list-inside space-y-2 text-gray-300">
-                    <li><strong>Supervised:</strong> Implemented a range of regression and classification models, including Logistic Regression, SVMs, and ensemble methods like Random Forest and XGBoost.</li>
-                    <li><strong>Unsupervised:</strong> Conducted clustering analysis using K-Means, K-Medoids, and DBSCAN.</li>
-                    <li><strong>Model Evaluation:</strong> Hands-on experience with cross-validation, hyperparameter tuning, and a variety of metrics (e.g., Precision, Recall, ROC-AUC, Silhouette Score).</li>
-                </ul>
-            </div>
-            <div class="flex flex-wrap gap-2 mt-4">
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Supervised Learning</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Unsupervised Learning</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Model Evaluation</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Clustering</span>
-            </div>
-
-        </div>
-
-</section>
-
-<section id="soft-skills" class="space-y-12">
-    <h2 class="text-3xl md:text-5xl font-bold text-center text-cyan-400">Cosmic Connections: The Soft Side of Strength </h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="glass-card p-6 h-full hover:shadow-xl hover:border-cyan-400 transition-all duration-300">
-            <div class="flex items-center justify-between mb-4 cursor-pointer" onclick="toggleReveal(this)">
-                <h3 class="text-xl font-semibold">Leadership & Project Management</h3>
-                <span class="text-2xl text-cyan-400 reveal-toggle">&#9656;</span>
-            </div>
-            <div class="hidden-content">
-                <ul class="list-disc list-inside space-y-2 text-gray-300">
-                    <li><strong>Team Leadership:</strong> Successfully led a team of four in authoring a peer-reviewed review article over eight months.</li>
-                    <li><strong>Scientific Communication:</strong> Delivered in-depth presentations on complex topics to leading experts.</li>
-                    <li><strong>Project Management:</strong> Managed a long-term research project while balancing academic commitments.</li>
-                </ul>
-            </div>
-            <div class="flex flex-wrap gap-2 mt-4">
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Leadership</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Project Management</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Scientific Communication</span>
-            </div>
-        </div>
-
-        <div class="glass-card p-6 h-full hover:shadow-xl hover:border-cyan-400 transition-all duration-300">
-            <div class="flex items-center justify-between mb-4 cursor-pointer" onclick="toggleReveal(this)">
-                <h3 class="text-xl font-semibold">Communication & Content Creation</h3>
-                <span class="text-2xl text-cyan-400 reveal-toggle">&#9656;</span>
-            </div>
-            <div class="hidden-content">
-                <ul class="list-disc list-inside space-y-2 text-gray-300">
-                    <li><strong>Interviewing:</strong> Conducted in-depth interviews with global experts for the "Lohitaksha's Den" podcast.</li>
-                    <li><strong>Content Development:</strong> Researched a variety of topics to curate high-quality podcast episodes.</li>
-                    <li><strong>Networking:</strong> Cultivated professional relationships with thought leaders.</li>
-                </ul>
-            </div>
-            <div class="flex flex-wrap gap-2 mt-4">
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Communication</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Podcasting</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Networking</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Content Creation</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="achievements" class="mt-24 space-y-16">
-    <h2 class="text-3xl md:text-5xl font-bold text-center text-cyan-400">The Constellation of My Academic Journey</h2>
-    <div class="grid md:grid-cols-2 gap-8">
-
-        <div class="glass-card p-8 flex flex-col h-full hover:shadow-xl hover:border-cyan-400 transition-all duration-300">
-            <div class="flex items-center justify-between mb-4 cursor-pointer" onclick="toggleReveal(this)">
-                <h3 class="text-2xl font-bold">Research & Publications</h3>
-                <span class="text-3xl text-cyan-400 reveal-toggle">&#9656;</span>
-            </div>
-            <div class="hidden-content">
-                <ul class="list-disc list-inside space-y-4 text-gray-300">
-                    <li>
-                        <strong>Published Thesis:</strong> Authored a thesis on the quantum behavior of confined atoms, offering new insights through theoretical and computational analysis.
-                    </li>
-                    <li>
-                        <strong>Lead Author (Journal Article):</strong> Led a team to publish a peer-reviewed article in Elsevier journal on <a href="https://doi.org/10.1016/j.ejphar.2024.176694">"Eicosanoid signaling in neuroinflammation associated with Alzheimer’s disease."</a>
-                    </li>
-                    <li>
-                        <strong>Authored Books:</strong>
-                        <ul class="list-disc list-inside space-y-2 ml-6">
-                            <li><a href="https://amzn.eu/d/8xvhCSY">"It's Your Life: Make it Happen" (Amazon, Apr 2025)</a></li>
-                            <li><a href="https://amzn.eu/d/iuaMkbm">"Brainwaves of The Bold: Harnessing the Power of the Mind for Effective Leadership" (Amazon, May 2025)</a></li>
-                            <li><a href="https://www.morebooks.shop/shop-ui/shop/product/9786208450908">"Studies on Shell Confined Atoms" (Lambert Academic Publishing, Jun 2025)</a></li>
+        <section id="projects" class="space-y-12 reveal">
+            <h3 class="text-2xl md:text-4xl font-bold text-center text-gray-300">Underway</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="glass-card card p-6 flex flex-col h-full hover:shadow-xl transition-all duration-300">
+                    <div class="reveal-hover"></div>
+                    <div class="collapsible-header">
+                        <h3 class="text-xl font-semibold text-cyan-300">Book Project: "The Quantum Revolution"</h3>
+                        <span class="text-xl text-cyan-400 toggle">&#9656;</span>
+                    </div>
+                    <div class="details">
+                        <ul class="list-disc list-inside space-y-2 text-gray-300 pt-2">
+                            <li>Leading the authorship of a two-volume advanced Quantum Mechanics series for graduate-level students, in collaboration with Dr. Caio Firme.</li>
+                            <li>The series has been accepted for publication by CRC Press.</li>
                         </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="flex flex-wrap gap-2 mt-auto pt-6 border-t border-gray-700">
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Academic Research</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Peer-Reviewed</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Lead Author</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Book Author</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Quantum Physics</span>
-            </div>
-        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="tag text-xs text-gray-300">Quantum Mechanics</span>
+                        <span class="tag text-xs text-gray-300">Author</span>
+                    </div>
+                </div>
 
-        <div class="glass-card p-8 flex flex-col h-full hover:shadow-xl hover:border-cyan-400 transition-all duration-300">
-            <div class="flex items-center justify-between mb-4 cursor-pointer" onclick="toggleReveal(this)">
-                <h3 class="text-2xl font-bold">Academic Excellence</h3>
-                <span class="text-3xl text-cyan-400 reveal-toggle">&#9656;</span>
-            </div>
-            <div class="hidden-content">
-                <ul class="list-disc list-inside space-y-4 text-gray-300">
-                    <li>
-                        <strong>Highest Academic Performer:</strong> Recognized as the top academic performer for five consecutive years during the Integrated Master’s program.
-                    </li>
-                    <li>
-                        <strong>Competitive Exam Results:</strong>
-                        <ul class="list-disc list-inside space-y-2 ml-6">
-                            <li>GATE 2025 - All India Rank 727</li>
-                            <li>CSIR-NET-JRF 2025 - All India Rank 37</li>
+                <div class="glass-card card p-6 flex flex-col h-full hover:shadow-xl transition-all duration-300">
+                    <div class="reveal-hover"></div>
+                    <div class="collapsible-header">
+                        <h3 class="text-xl font-semibold text-cyan-300">M.Tech Project: Hydrogen Embrittlement</h3>
+                        <span class="text-xl text-cyan-400 toggle">&#9656;</span>
+                    </div>
+                    <div class="details">
+                        <ul class="list-disc list-inside space-y-2 text-gray-300 pt-2">
+                            <li>Investigating mechanical and microstructural evolution of Low Density Steel under hydrogen exposure.</li>
+                            <li>Combining fracture toughness tests, microanalysis techniques like XRF/SEM/EBSD.</li>
                         </ul>
-                    </li>
-                    <li>
-                        <strong>Early Recognition:</strong> Featured in the school magazine for top scores in the 10th-grade examinations.
-                    </li>
-                </ul>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="tag text-xs text-gray-300">Microanalysis</span>
+                        <span class="tag text-xs text-gray-300">Modelling</span>
+                    </div>
+                </div>
             </div>
-            <div class="flex flex-wrap gap-2 mt-auto pt-6 border-t border-gray-700">
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Academic Achievement</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Awards & Honors</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Competitive Exams</span>
-                <span class="px-3 py-1 bg-gray-700 text-cyan-400 rounded-full text-sm font-semibold">Test Scores</span>
+
+            <h3 class="text-2xl md:text-4xl font-bold text-center text-gray-300 mt-12 mb-8">Accomplished</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="glass-card card p-6 flex flex-col h-full hover:shadow-xl transition-all duration-300">
+                    <div class="reveal-hover"></div>
+                    <div class="collapsible-header">
+                        <h3 class="text-xl font-semibold text-cyan-300">Master’s Project: Confined Hydrogen (Phase I)</h3>
+                        <span class="text-xl text-cyan-400 toggle">&#9656;</span>
+                    </div>
+                    <div class="details">
+                        <ul class="list-disc list-inside space-y-2 text-gray-300 pt-2">
+                            <li>Conducted an in-depth literature survey on the theoretical treatment of screened Coulomb potentials.</li>
+                            <li>Explored effects of Yukawa and Hulthén potentials on electronic structures.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="glass-card card p-6 flex flex-col h-full hover:shadow-xl transition-all duration-300">
+                    <div class="reveal-hover"></div>
+                    <div class="collapsible-header">
+                        <h3 class="text-xl font-semibold text-cyan-300">Master's Project: Phase II</h3>
+                        <span class="text-xl text-cyan-400 toggle">&#9656;</span>
+                    </div>
+                    <div class="details">
+                        <p class="text-gray-300 pt-2 text-sm">Computed Shannon entropy and disequilibrium variables using advanced Python workflows (NumPy, Pandas).</p>
+                    </div>
+                </div>
+
+                <div class="glass-card card p-6 flex flex-col h-full hover:shadow-xl transition-all duration-300">
+                    <div class="reveal-hover"></div>
+                    <div class="collapsible-header">
+                        <h3 class="text-xl font-semibold text-cyan-300">Published Review Article</h3>
+                        <span class="text-xl text-cyan-400 toggle">&#9656;</span>
+                    </div>
+                    <div class="details">
+                        <p class="text-gray-300 pt-2 text-sm">Published in the European Journal of Pharmacology (May 2024). Examining biochemical mechanisms of neuroinflammation.</p>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <section id="skills" class="space-y-16 reveal">
+            <h2 class="text-3xl md:text-5xl font-bold text-center text-cyan-400">Cosmic Skills</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="glass-card card p-6">
+                    <div class="reveal-hover"></div>
+                    <h3 class="text-xl font-bold text-cyan-300 mb-4">Python & ML Fundamentals</h3>
+                    <p class="text-gray-300 text-sm">Proficient with PyTorch, LangGraph, NumPy, Pandas, and Matplotlib for heavy scientific evaluations.</p>
+                </div>
+                <div class="glass-card card p-6">
+                    <div class="reveal-hover"></div>
+                    <h3 class="text-xl font-bold text-cyan-300 mb-4">Core Analytics</h3>
+                    <p class="text-gray-300 text-sm">Regression, cross-validation metrics, and deep learning neural architectures.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="achievements" class="space-y-16 reveal">
+            <h2 class="text-3xl md:text-5xl font-bold text-center text-cyan-400">Academic Honors</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="glass-card card p-8">
+                    <div class="reveal-hover"></div>
+                    <h3 class="text-2xl font-bold text-cyan-300 mb-2">National Ranks</h3>
+                    <p class="text-gray-400">CSIR-NET-JRF 2025: AIR 37</p>
+                    <p class="text-gray-400">GATE 2025: AIR 727</p>
+                </div>
+                <div class="glass-card card p-8">
+                    <div class="reveal-hover"></div>
+                    <h3 class="text-2xl font-bold text-cyan-300 mb-2">University of Hyderabad</h3>
+                    <p class="text-gray-400">Continuous 1st Rank Holder for 5 Years across the IMSc Chemical Sciences Program.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="glass-card card p-8 md:p-12 text-center reveal">
+            <div class="reveal-hover"></div>
+            <h2 class="text-3xl md:text-5xl font-bold text-cyan-400 mb-6 w-full">Connect Across the Cosmos</h2>
+            <div class="flex flex-wrap justify-center gap-6 mt-6">
+                <a href="mailto:lohitaksha.koppada123@gmail.com" class="btn text-sm font-bold">Email Me</a>
+                <a href="https://www.linkedin.com/in/lohitaksha-den/" target="_blank" class="btn ghost text-sm font-bold">LinkedIn</a>
+            </div>
+        </section>
     </div>
-</section>
-        <!-- Contact Section -->
-<section id="contact" class="glass-card p-8 md:p-12 mb-12 text-center">
-    <h2 class="text-3xl md:text-5xl font-bold text-cyan-400 mb-6 w-full">Connect Across the Cosmos</h2>
-    <p class="text-gray-300 mb-10 max-w-2xl mx-auto">
-        Whether you want to collaborate, share ideas, or simply say hello — I’m just a click away. Let’s create something extraordinary together.
-    </p>
 
-    <div class="flex flex-wrap justify-center gap-8 md:gap-12 text-lg">
-        
-        <!-- Email -->
-        <a href="mailto:lohitaksha.koppada123@gmail.com" class="group bg-gray-800/50 hover:bg-cyan-500/20 px-6 py-4 rounded-xl transition-colors flex items-center space-x-3 shadow-lg">
-            <i class="fas fa-envelope text-cyan-400 text-2xl group-hover:text-cyan-300"></i>
-            <div>
-                <p class="font-semibold text-gray-100">Email</p>
-                <p class="text-gray-400 text-sm">lohitaksha.koppada123@gmail.com</p>
-            </div>
-        </a>
-
-        <!-- LinkedIn -->
-        <a href="https://www.linkedin.com/in/lohitaksha-den/" target="_blank" class="group bg-gray-800/50 hover:bg-cyan-500/20 px-6 py-4 rounded-xl transition-colors flex items-center space-x-3 shadow-lg">
-            <i class="fab fa-linkedin text-cyan-400 text-2xl group-hover:text-cyan-300"></i>
-            <div>
-                <p class="font-semibold text-gray-100">LinkedIn</p>
-                <p class="text-gray-400 text-sm">linkedin.com/in/lohitaksha-den/</p>
-            </div>
-        </a>
-
-        <!-- Website -->
-        <a href="https://lohit-hero.github.io/Lohitaksha-web/" target="_blank"
-           class="group bg-gray-800/50 hover:bg-cyan-500/20 px-6 py-4 rounded-xl transition-colors flex items-center space-x-3 shadow-lg">
-            <i class="fas fa-globe text-cyan-400 text-2xl group-hover:text-cyan-300"></i>
-            <div>
-                <p class="font-semibold text-gray-100">Website</p>
-                <p class="text-gray-400 text-sm">lohit-hero.github.io/Lohitaksha-web/</p>
-            </div>
-        </a>
-    </div>
-</section>
-
-        
-
-
-    <!-- Footer -->
-    <footer class="p-6 text-center text-gray-500 text-sm">
-        <p>&copy; 2025 Lohitaksha Koppada. All rights reserved.</p>
+    <footer class="p-6 text-center text-gray-500 text-sm border-t border-gray-900 mt-12">
+        <p>&copy; <span id="year"></span> Lohitaksha Koppada. All rights reserved.</p>
     </footer>
 
-    <!-- Three.js Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-        window.onload = function() {
-            // Function to handle the reveal functionality
-            window.toggleReveal = function(element) {
-                const toggleIcon = element.querySelector('.reveal-toggle');
-                const content = element.nextElementSibling;
-                
-                if (content && toggleIcon) {
-                    content.classList.toggle('hidden-content');
-                    toggleIcon.classList.toggle('rotated');
-                }
-            };
-            
-            // Set up the scene, camera, and renderer
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), antialias: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            renderer.setClearColor(0x000000, 1);
+    <a href="#" id="toTop" class="top"><i class="fas fa-chevron-up"></i></a>
 
-            // Create a starfield
-            const starsGeometry = new THREE.BufferGeometry();
-            const starsCount = 5000;
-            const posArray = new Float32Array(starsCount * 3);
-            for (let i = 0; i < starsCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 2000;
-            }
-            starsGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            const starsMaterial = new THREE.PointsMaterial({
-                color: 0xffffff,
-                size: 1.5
-            });
-            const stars = new THREE.Points(starsGeometry, starsMaterial);
-            scene.add(stars);
-
-            // Create a central planet
-            const planetGeometry = new THREE.SphereGeometry(100, 64, 64);
-            const planetMaterial = new THREE.MeshLambertMaterial({
-                color: 0x00aaff,
-                emissive: 0x00aaff,
-                emissiveIntensity: 0.2,
-                wireframe: true,
-            });
-            const planet = new THREE.Mesh(planetGeometry, planetMaterial);
-            scene.add(planet);
-
-            // Create a galaxy-like effect with a glowing sphere
-            const galaxyMaterial = new THREE.ShaderMaterial({
-                uniforms: {
-                    color1: { value: new THREE.Color(0x000000) },
-                    color2: { value: new THREE.Color(0x00aaff) },
-                    time: { value: 0 }
-                },
-                vertexShader: `
-                    varying vec3 vNormal;
-                    void main() {
-                        vNormal = normalize(normalMatrix * normal);
-                        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-                    }
-                `,
-                fragmentShader: `
-                    uniform vec3 color1;
-                    uniform vec3 color2;
-                    uniform float time;
-                    varying vec3 vNormal;
-                    void main() {
-                        vec3 finalColor = mix(color1, color2, pow(dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.0));
-                        gl_FragColor = vec4(finalColor, 1.0);
-                    }
-                `,
-                side: THREE.BackSide,
-                blending: THREE.AdditiveBlending,
-                transparent: true,
-                opacity: 0.5,
-            });
-            const galaxyMesh = new THREE.Mesh(new THREE.SphereGeometry(150, 32, 32), galaxyMaterial);
-            scene.add(galaxyMesh);
-
-            // Add lighting
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
-            scene.add(ambientLight);
-            const pointLight = new THREE.PointLight(0x38bdf8, 1, 1000);
-            pointLight.position.set(200, 200, 200);
-            scene.add(pointLight);
-
-            // Camera position
-            camera.position.z = 250;
-
-            // Mouse interaction for camera control
-            let isDragging = false;
-            let previousMousePosition = {
-                x: 0,
-                y: 0
-            };
-
-            const toRadians = (angle) => angle * (Math.PI / 180);
-
-            document.addEventListener('mousedown', (e) => {
-                isDragging = true;
-            });
-            document.addEventListener('mouseup', (e) => {
-                isDragging = false;
-            });
-            document.addEventListener('mousemove', (e) => {
-                if (isDragging) {
-                    const deltaMove = {
-                        x: e.clientX - previousMousePosition.x,
-                        y: e.clientY - previousMousePosition.y
-                    };
-                    planet.rotation.y += toRadians(deltaMove.x * 0.5);
-                    planet.rotation.x += toRadians(deltaMove.y * 0.5);
-                    galaxyMesh.rotation.y += toRadians(deltaMove.x * 0.5);
-                    galaxyMesh.rotation.x += toRadians(deltaMove.y * 0.5);
-                }
-                previousMousePosition = {
-                    x: e.clientX,
-                    y: e.clientY
-                };
-            });
-
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-
-            // Animation loop
-            const animate = function() {
-                requestAnimationFrame(animate);
-
-                // Rotate the stars to simulate movement
-                stars.rotation.y += 0.0005;
-                stars.rotation.x += 0.0005;
-                
-                // Add a gentle rotation to the planet and galaxy for a constant movement feel
-                planet.rotation.y += 0.001;
-                galaxyMesh.rotation.y += 0.0005;
-
-                renderer.render(scene, camera);
-            };
-
-            animate();
-        };
-    </script>
+    <script src="script.js" defer></script>
 </body>
 </html>
